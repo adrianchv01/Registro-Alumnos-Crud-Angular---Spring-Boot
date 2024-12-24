@@ -1,0 +1,41 @@
+version: '3.8'
+
+
+services:
+
+  app: #Es el apartado del servicio de la aplicacion
+
+    build: . # Le indica a Docker que debe construir la imagen de la aplicación
+
+    ports:  #Expone el puerto 8090 en el contenedor y permite acceder a la aplicación
+
+      - "8082:8082"
+
+    depends_on: #Indica que el servicio app depende de que el servicio db
+
+      - db
+
+    environment:
+
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/APPCIBERTEC2024 #Define la URL de la base de datos MySQL
+
+      SPRING_DATASOURCE_USERNAME: root #El nombre de usuario para conectarse a MySQL, en este caso root
+
+      SPRING_DATASOURCE_PASSWORD: root #La contraseña es vacía (como indica el valor ""
+
+
+  db: #Este es el servicio de base de datos MySQL.
+
+    image: mysql:8.0 #Usa la imagen oficial de MySQL en su versión 8.0.
+
+    restart: always #Asegura que el contenedor se reiniciará automáticamente si se detiene o falla
+
+    environment:
+
+      MYSQL_ROOT_PASSWORD: root  # Permito que contenga contraseña vacias
+
+      MYSQL_DATABASE: APPCIBERTEC2024 #Crea la base de datos appcibertec2024 al iniciar el contenedor.
+
+    ports:
+
+      - "3306:3306"

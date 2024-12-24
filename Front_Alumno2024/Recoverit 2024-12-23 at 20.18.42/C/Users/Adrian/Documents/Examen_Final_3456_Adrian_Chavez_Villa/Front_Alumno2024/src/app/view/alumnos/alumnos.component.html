@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg" style="background-color: black;">
+    <div class="container-fluid">
+      <a class="navbar-brand mx-auto" href="http://localhost:4200/alumnos" style="color: white; text-transform: uppercase; font-weight: bold; font-size: 30px;">
+        Listado
+      </a>
+  
+      <button type="submit" class="btn btn-danger" style="width: auto;" (click)="logout()">
+        Cerrar sesión
+      </button>
+    </div>
+  </nav>
+  
+
+<div class="container">
+  <h1 class="text-center">Lista de alumnos</h1>
+  <button class="btn btn-dark position-relative" [routerLink]="['/crear-alumno']">Agregar Alumno</button>
+  <table class="table mt-2 table-bordered table-dark">
+      <thead class="table-warning">
+          <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Dni</th>
+              <th>Ciclo</th>
+              <th>Estado</th>
+              <th>Usuario</th>
+              <th>Fecha</th>
+              <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let alumno of Alumnos">
+            <td>{{ alumno.id }}</td>
+            <td>{{ alumno.nombre }}</td>
+            <td>{{ alumno.apellido }}</td>
+            <td>{{ alumno.dni }}</td>
+            <td>{{ alumno.ciclo }}</td>
+            <td>{{ alumno.estado }}</td>
+            <td>{{ alumno.usuario }}</td>
+            <td>{{ alumno.fecha | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td class="botones">
+              <button type="button" class="btn btn-info me-2" [routerLink]="['/actualizar-alumno', alumno.id]">Editar</button>
+              <button type="button" class="btn btn-danger" (click)="eliminarAlumno(alumno)">Eliminar</button>
+            </td>
+          </tr>
+          
+      </tbody>
+  </table>
+</div>
+
+
